@@ -9,8 +9,8 @@ export default defineConfig({
   // for path alias
   resolve: {
     alias: {
-      '@/': `${__dirname}/src/`,
-      '~/': `${__dirname}/public/`,
+      '@/': `${__dirname}/src/`, // eslint-disable no-undef
+      '~/': `${__dirname}/public/`, // eslint-disable no-undef
     },
   },
   test: {
