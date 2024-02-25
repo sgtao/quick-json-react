@@ -1,11 +1,9 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-  ],
+  plugins: [react()],
   // for path alias
   resolve: {
     alias: {
@@ -21,10 +19,7 @@ export default defineConfig({
     // since parsing CSS is slow
     css: true,
     coverage: {
-      exclude: [
-        '.eslintrc.cjs',
-        'src/main.jsx',
-      ]
+      exclude: ['.eslintrc.cjs', 'src/main.jsx'],
     },
   },
-})
+});

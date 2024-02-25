@@ -1,7 +1,7 @@
 // TextInput.jsx
 const TextInput = (props) => {
   // eslint-disable-next-line react/prop-types
-  const [ text, setText ] = props.textInputState;
+  const [text, setText] = props.textInputState;
   return (
     <div>
       <input
