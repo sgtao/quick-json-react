@@ -13,4 +13,12 @@ export default defineConfig({
       '~/': `${__dirname}/public/`,
     },
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './vitest-setup.jsx',
+    // you might want to disable it, if you don't have tests that rely on CSS
+    // since parsing CSS is slow
+    css: true,
+  },
 })
