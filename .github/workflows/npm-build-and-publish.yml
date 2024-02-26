@@ -46,7 +46,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           # Deploy keys and Personal access Tokens are also available
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./dist
           # If keep_files is set to true, 
           # you can suppress the behavior that all files are deleted once on each git push.
