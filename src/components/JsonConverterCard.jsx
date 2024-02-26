@@ -2,21 +2,22 @@
 import { useState } from 'react';
 import TextInput from './TextInput';
 
+export const checkJson = (text) => {
+  let resultCheck = '';
+  try {
+    JSON.parse(text);
+    resultCheck = 'JSON format';
+  } catch (e) {
+    resultCheck = 'Not JSON format';
+  }
+  return resultCheck;
+};
+
 const JsonConverterCard = () => {
   const [text, setText] = useState('');
   const [checkResult, setCheckResult] = useState('');
   const checkTextInput = () => {
     setCheckResult('');
-    const checkJson = (text) => {
-      let resultCheck = '';
-      try {
-        JSON.parse(text);
-        resultCheck = 'JSON format';
-      } catch (e) {
-        resultCheck = 'Not JSON format';
-      }
-      return resultCheck;
-    };
     setCheckResult(checkJson(text));
   };
 
