@@ -44,12 +44,11 @@ jobs:
       # Published on GitHub Pages
       - name: Push gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
+        # If you're changing the branch from main,
+        # also change the `main` in `refs/heads/main`
+        # below accordingly.
+        if: github.ref == 'refs/heads/main'
         with:
           # Deploy keys and Personal access Tokens are also available
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./dist
-          # If keep_files is set to true, 
-          # you can suppress the behavior that all files are deleted once on each git push.
-          keep_files: false
-          user_name: github-actions
-          user_email: github-actions@github.com
