@@ -1,5 +1,5 @@
-import { expect, describe, test, it, vi } from 'vitest';
-import { cleanup, render, screen, userEvent } from './utils/test-utils';
+import { expect, describe, test, it } from 'vitest';
+import { render, screen, userEvent } from './utils/test-utils';
 import JsonConverterCard from '@/components/JsonConverterCard';
 import { checkJson } from '@/components/JsonConverterCard';
 
@@ -38,7 +38,6 @@ describe('JsonConverterCard test', () => {
     expect(await screen.findByText(/Check & Beautify/i)).toBeInTheDocument();
   });
 });
-
 
 describe('checkJson test', () => {
   it('should return NG at illegal JSON', async () => {
