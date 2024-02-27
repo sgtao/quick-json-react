@@ -15,23 +15,22 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment,
-# skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs
-# as we want to allow these production deployments to complete.
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  publish-gh-pages:
-    runs-on:
-      - ubuntu-latest
-
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      # Creating files to be published to GitHub Pages
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
