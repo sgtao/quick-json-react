@@ -1,8 +1,7 @@
 // TextInput.test.jsx
-import { expect, describe, it, vi } from 'vitest';
+import { expect, describe, it, test, vi } from 'vitest';
 import { render, screen, userEvent } from './utils/test-utils';
 import TextInput from '@/components/TextInput';
-// import { input } from '@testing-library/user-event/dist/types/event';
 
 describe('TextInput Component Test', async () => {
   it('should render a text input', () => {
@@ -25,5 +24,19 @@ describe('TextInput Component Test', async () => {
 
     // setTextに入力値が引数とされているか？を確認
     expect(setText).toHaveBeenCalledWith(inputString[0]);
+  });
+
+  test('ClearButton clear inputs', async () => {
+    // Arrange
+    const test = 'Hello World';
+    const clearText = vi.fn();
+    render(<TextInput textInputState={[test, clearText]} />);
+
+    // Act
+    await userEvent.click(screen.getByRole('button', { name: 'Clear Button' }));
+
+    // Assert
+    // setText が、引数''で読み出されるか？を確認
+    expect(clearText).toHaveBeenCalledOnce();
   });
 });
