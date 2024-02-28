@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <>
-      <h1>json-viewer</h1>
+      <h1>quick-json-react</h1>
       <JsonConverterCard />
     </>
   );

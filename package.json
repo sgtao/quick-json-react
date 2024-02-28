@@ -1,12 +1,12 @@
 {
-  "name": "selfmade-json-viewer",
+  "name": "quick-json-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src --ext js,jsx --max-warnings 0",
+    "lint": "eslint src --ext js,jsx --max-warnings 0 --no-ignore",
     "lint:fix": "eslint src --ext js,jsx --fix",
     "format": "prettier . --write",
     "test": "vitest",
@@ -49,8 +49,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,md}": [
-      "npm run lint:fix",
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint",
       "npm run format"
     ]
   }

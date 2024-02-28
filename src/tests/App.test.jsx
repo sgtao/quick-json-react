@@ -5,6 +5,6 @@ import App from '../App';
 describe('App working test', () => {
   it('the title is visible', () => {
     render(<App />);
-    expect(screen.getByText(/json-viewer/i)).toBeInTheDocument();
+    expect(screen.getByText(/quick-json-react/i)).toBeInTheDocument();
   });
 });
