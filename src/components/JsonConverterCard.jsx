@@ -1,24 +1,27 @@
 // JsonConverterCard.jsx
 import { useState } from 'react';
 import TextInput from './TextInput';
-
-export const checkJson = (text) => {
-  let resultCheck = '';
-  try {
-    JSON.parse(text);
-    resultCheck = 'JSON format';
-  } catch (e) {
-    resultCheck = 'Not JSON format';
-  }
-  return resultCheck;
-};
+import ObjectViewer from './ObjectViewer';
 
 const JsonConverterCard = () => {
   const [text, setText] = useState('');
   const [checkResult, setCheckResult] = useState('');
-  const checkTextInput = () => {
-    setCheckResult('');
-    setCheckResult(checkJson(text));
+  const [isJson, setIsJson] = useState(false);
+  const [shownObj, setShownObj] = useState({});
+
+  const checkTextInput = async () => {
+    try {
+      const parsedJson = await JSON.parse(text);
+      setCheckResult('JSON format');
+      console.dir(parsedJson);
+      setShownObj(parsedJson);
+      const stringJson = await JSON.stringify(parsedJson, undefined, 2);
+      console.log(stringJson);
+      setIsJson(true);
+    } catch (e) {
+      setIsJson(false);
+      setCheckResult('Not JSON format');
+    }
   };
 
   return (
@@ -30,6 +33,7 @@ const JsonConverterCard = () => {
           Check & Beautify
         </button>
         <p aria-label="Check-Result">Check Result: {checkResult}</p>
+        {isJson && <ObjectViewer obj={shownObj} />}
       </div>
     </div>
   );

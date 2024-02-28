@@ -1,7 +1,7 @@
 // TextInput.test.jsx
 import { expect, describe, it, vi } from 'vitest';
 import { render, screen, userEvent } from './utils/test-utils';
-import TextInput from '../components/TextInput';
+import TextInput from '@/components/TextInput';
 // import { input } from '@testing-library/user-event/dist/types/event';
 
 describe('TextInput Component Test', async () => {
