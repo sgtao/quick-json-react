@@ -9,6 +9,14 @@ const JsonConverterCard = () => {
   const [isJson, setIsJson] = useState(false);
   const [shownObj, setShownObj] = useState({});
 
+  const styleEnterText = {
+    maxWidth: '38rem',
+    textWrap: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    margin: '0 auto',
+    marginBottom: '2rem',
+  };
   const checkTextInput = async () => {
     try {
       const parsedJson = await JSON.parse(text);
@@ -28,7 +36,9 @@ const JsonConverterCard = () => {
     <div>
       <div className="card">
         <TextInput textInputState={[text, setText]} />
-        <p aria-label="Entered-Text">Entered Text: {text}</p>
+        <p aria-label="Entered-Text" style={styleEnterText}>
+          Entered Text: {text}
+        </p>
         <button aria-label="Check-JSON" onClick={checkTextInput}>
           Check & Beautify
         </button>
