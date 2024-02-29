@@ -39,4 +39,21 @@ describe('TextInput Component Test', async () => {
     // setText が、引数''で読み出されるか？を確認
     expect(clearText).toHaveBeenCalledOnce();
   });
+
+  /*
+  test('PasteButton Clicked', async () => {
+    // Arrange
+    const test = 'Hello World';
+    const setText = vi.fn();
+    // const handlePasteClick = vi.spyOn(TextInput, 'handlePasteClick');
+    render(<TextInput textInputState={[test, setText]} />);
+
+    // Act
+    await userEvent.click(screen.getByRole('button', { name: 'Paste Button' }));
+
+    // Assert
+    // handlePasteClick が読み出されるか？を確認
+    expect(setText).toHaveBeenCalledOnce();
+  });
+*/
 });
