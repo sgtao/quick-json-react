@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import TextInput from './TextInput';
 import ObjectViewer from './ObjectViewer';
+import { setStorageItem } from '../libs/accessLocalStorage.jsx';
 
 const JsonConverterCard = () => {
   const [text, setText] = useState('');
@@ -25,6 +26,10 @@ const JsonConverterCard = () => {
       setShownObj(parsedJson);
       const stringJson = await JSON.stringify(parsedJson, undefined, 2);
       console.log(stringJson);
+
+      // localStorageに保存
+      setStorageItem(parsedJson);
+
       setIsJson(true);
     } catch (e) {
       setIsJson(false);
