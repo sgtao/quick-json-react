@@ -1,10 +1,11 @@
 // JsonConverterCard.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextInput from './TextInput';
 import ObjectViewer from './ObjectViewer';
 import { setStorageItem } from '../libs/accessLocalStorage.jsx';
 
-const JsonConverterCard = () => {
+// eslint-disable-next-line react/prop-types
+const JsonConverterCard = ({ encodedJson: encodedJson = null }) => {
   const [text, setText] = useState('');
   const [checkResult, setCheckResult] = useState('');
   const [isJson, setIsJson] = useState(false);
@@ -36,6 +37,13 @@ const JsonConverterCard = () => {
       setCheckResult('Not JSON format');
     }
   };
+
+  useEffect(() => {
+    console.log(`encodedJson is ${encodedJson}`);
+    if (encodedJson !== null) {
+      setText(encodedJson);
+    }
+  }, [encodedJson]);
 
   return (
     <div>
