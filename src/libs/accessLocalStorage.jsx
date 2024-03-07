@@ -21,8 +21,8 @@ const getStorageItemList = () => {
     console.log(key + ': ' + JSON.stringify(value));
     storageData.push({ key: key, value: value });
   }
-  console.log(storageData);
   console.log('in accessLocalStorage');
+  console.log(storageData);
   return storageData;
 };
 
@@ -41,10 +41,16 @@ const setStorageItem = (itemData) => {
     now.getHours().toString().padStart(2, '0') +
     ':' +
     now.getMinutes().toString().padStart(2, '0') +
-    '.' +
+    ':' +
     now.getSeconds().toString().padStart(2, '0');
   console.log(`In accessLocalStorage, set parsedJson to ${setKey}`);
-  localStorage.setItem(setKey, JSON.stringify(itemData));
+  localStorage.setItem(
+    setKey,
+    JSON.stringify({
+      savedAt: now.toJSON(),
+      json: itemData,
+    }),
+  );
 };
 
 export { checkSupportLocalStorage, getStorageItemList, setStorageItem };

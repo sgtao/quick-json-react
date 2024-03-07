@@ -1,6 +1,7 @@
 import { expect, describe, test, vi } from 'vitest';
 import { render, screen } from './utils/test-utils';
 import App from '@/App';
+import { setStorageItem } from '../libs/accessLocalStorage';
 
 describe('App working test', () => {
   const mockWindowLocation = (url) => {
@@ -20,12 +21,12 @@ describe('App working test', () => {
   });
   test('if localStorage has anything, run consoleJsonLists', () => {
     // テスト用にLocalStorageにデータを設定
-    localStorage.setItem('test-key-1', '{}');
+    setStorageItem('{}');
     console.log = vi.fn();
 
     render(<App />);
     // expect(screen.getByText(/quick-json-react/i)).toBeInTheDocument();
-    expect(console.log).toHaveBeenCalledWith('stringJson is {}');
+    expect(console.log).toHaveBeenCalledWith('- stringJson: "{}"');
 
     // テスト後にLocalStorageをクリア
     localStorage.clear();

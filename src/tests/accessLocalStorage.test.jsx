@@ -68,11 +68,15 @@ describe('setStorageItem', () => {
   it('should save item to localStorage with correct key', () => {
     let testData = { test: 'test-data' };
     // Act
-    setStorageItem(testData);
+    setStorageItem(JSON.stringify(testData));
 
     // Assert
     const firstKeyName = localStorage.key(0);
+    console.log(firstKeyName);
+    const firstKeyObj = JSON.parse(localStorage.getItem(firstKeyName));
+    const loadedJson = firstKeyObj.json;
     console.log(`at setStorageItem, 1st keyName is ${firstKeyName}`);
-    expect(localStorage.getItem(firstKeyName)).toBe(JSON.stringify(testData));
+    console.log(firstKeyObj);
+    expect(loadedJson).toBe('{"test":"test-data"}');
   });
 });
