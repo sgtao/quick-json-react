@@ -1,10 +1,25 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import JsonConverterCard from './components/JsonConverterCard';
+import HistorySideMenu from './components/HistorySideMenu';
 import './App.css';
 import {
   checkSupportLocalStorage,
   getStorageItemList,
 } from './libs/accessLocalStorage.jsx';
+
+const StyledAppBoard = styled.div({
+  height: '100vh',
+  minWidth: 'fit-content',
+  // maxWidth: '100%',
+  margin: '0 auto',
+  textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  flexWrap: 'nowrap',
+  justifyContent: 'flex-start',
+});
 
 function App() {
   const [encodedJson, setEncodedJson] = useState('');
@@ -43,10 +58,13 @@ function App() {
     checkUrlQuery();
   }, []);
   return (
-    <>
-      <h1>quick-json-react</h1>
-      <JsonConverterCard encodedJson={encodedJson} />
-    </>
+    <StyledAppBoard>
+      <HistorySideMenu style={{ minWidth: '12rem' }} />
+      <div style={{ minWidth: 'fit-content' }}>
+        <h1>quick-json-react</h1>
+        <JsonConverterCard encodedJson={encodedJson} />
+      </div>
+    </StyledAppBoard>
   );
 }
 

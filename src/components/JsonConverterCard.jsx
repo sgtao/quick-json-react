@@ -10,6 +10,23 @@ const StyledDivision = styled.div({
   flexDirection: 'column', // Fix: Corrected property name
   alignItems: 'center',
 });
+const StyledButton = styled.button({
+  borderRadius: '8px', // Fix: Added quotes and corrected property name
+  border: '1px solid transparent', // Fix: Added quotes
+  padding: '0.6em 1.2em',
+  fontSize: '1em', // Fix: Added quotes and corrected property name
+  fontWeight: 500,
+  fontFamily: 'inherit',
+  backgroundColor: '#f9f9f9',
+  cursor: 'pointer',
+  transition: 'border-color 0.25s', // Fix: Added quotes
+  '&:hover': {
+    borderColor: '#646cff',
+  },
+  '&:focus, &:focus-visible': {
+    outline: '4px auto -webkit-focus-ring-color', // Fix: Added quotes
+  },
+});
 
 // eslint-disable-next-line react/prop-types
 const JsonConverterCard = ({ encodedJson: encodedJson = null }) => {
@@ -58,9 +75,9 @@ const JsonConverterCard = ({ encodedJson: encodedJson = null }) => {
       <p aria-label="Entered-Text" style={styleEnterText}>
         Entered Text: {text}
       </p>
-      <button aria-label="Check-JSON" onClick={checkTextInput}>
+      <StyledButton aria-label="Check-JSON" onClick={checkTextInput}>
         Check & Beautify
-      </button>
+      </StyledButton>
       <p aria-label="Check-Result">Check Result: {checkResult}</p>
       {isJson && <ObjectViewer obj={shownObj} />}
     </StyledDivision>

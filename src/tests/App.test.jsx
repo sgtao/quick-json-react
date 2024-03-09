@@ -12,6 +12,7 @@ describe('App working test', () => {
   test('the title is visible', () => {
     render(<App />);
     expect(screen.getByText(/quick-json-react/i)).toBeInTheDocument();
+    expect(screen.getByText(/Hisotry of JSONs/i)).toBeInTheDocument();
   });
   test('when url has json query, get query parameters', () => {
     mockWindowLocation('http://localhost:3000/json?encoded=%7B%7D');
