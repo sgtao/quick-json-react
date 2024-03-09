@@ -1,8 +1,15 @@
 // JsonConverterCard.jsx
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import TextInput from './TextInput';
 import ObjectViewer from './ObjectViewer';
 import { setStorageItem } from '../libs/accessLocalStorage.jsx';
+
+const StyledDivision = styled.div({
+  display: 'flex',
+  flexDirection: 'column', // Fix: Corrected property name
+  alignItems: 'center',
+});
 
 // eslint-disable-next-line react/prop-types
 const JsonConverterCard = ({ encodedJson: encodedJson = null }) => {
@@ -46,19 +53,17 @@ const JsonConverterCard = ({ encodedJson: encodedJson = null }) => {
   }, [encodedJson]);
 
   return (
-    <div>
-      <div className="card">
-        <TextInput textInputState={[text, setText]} />
-        <p aria-label="Entered-Text" style={styleEnterText}>
-          Entered Text: {text}
-        </p>
-        <button aria-label="Check-JSON" onClick={checkTextInput}>
-          Check & Beautify
-        </button>
-        <p aria-label="Check-Result">Check Result: {checkResult}</p>
-        {isJson && <ObjectViewer obj={shownObj} />}
-      </div>
-    </div>
+    <StyledDivision className="card">
+      <TextInput textInputState={[text, setText]} />
+      <p aria-label="Entered-Text" style={styleEnterText}>
+        Entered Text: {text}
+      </p>
+      <button aria-label="Check-JSON" onClick={checkTextInput}>
+        Check & Beautify
+      </button>
+      <p aria-label="Check-Result">Check Result: {checkResult}</p>
+      {isJson && <ObjectViewer obj={shownObj} />}
+    </StyledDivision>
   );
 };
 

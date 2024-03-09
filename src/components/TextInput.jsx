@@ -1,7 +1,16 @@
 // TextInput.jsx
 import styled from 'styled-components';
-import pasteIcon from '@/assets/paste-icon.svg';
+// import pasteIcon from '@/assets/paste-icon.svg';
+import { HiOutlineDocumentDuplicate } from 'react-icons/hi';
 
+const StyledDivision = styled.div({
+  margin: '0 auto',
+  display: 'flex',
+  flexDirection: 'row', // Fix: Corrected property name
+  flexWrap: 'wrap', // Fix: Corrected property name
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+});
 const StyledInput = styled.input({
   minWidth: '24rem',
   height: '2rem',
@@ -33,16 +42,16 @@ const TextInput = (props) => {
   // eslint-disable-next-line react/prop-types
   const [text, setText] = props.textInputState;
   // eslint-disable-next-line no-unused-vars
-  const PasteIcon = () => (
-    <i>
-      {/* <img src={pasteIcon} style={IconImage} alt="paste from clipboard" /> */}
-      <img
-        src={pasteIcon}
-        style={{ height: '1.2em' }}
-        alt="paste from clipboard"
-      />
-    </i>
-  );
+  // const PasteIcon = () => (
+  //   <i>
+  //     {/* <img src={pasteIcon} style={IconImage} alt="paste from clipboard" /> */}
+  //     <img
+  //       src={pasteIcon}
+  //       style={{ height: '1.2em' }}
+  //       alt="paste from clipboard"
+  //     />
+  //   </i>
+  // );
 
   const handlePasteClick = async () => {
     try {
@@ -55,7 +64,7 @@ const TextInput = (props) => {
   };
 
   return (
-    <div>
+    <StyledDivision>
       <StyledInput
         type="text"
         value={text}
@@ -67,9 +76,9 @@ const TextInput = (props) => {
         X
       </ClearButton>
       <PasteButton onClick={handlePasteClick} aria-label="Paste Button">
-        <PasteIcon />
+        <HiOutlineDocumentDuplicate size={'1.5rem'} color={'#222'} />
       </PasteButton>
-    </div>
+    </StyledDivision>
   );
 };
 
