@@ -23,6 +23,7 @@ const StyledAppBoard = styled.div({
 
 function App() {
   const [encodedJson, setEncodedJson] = useState('');
+  const [jsonHistory, setJsonHistory] = useState([]);
   const checkUrlQuery = () => {
     console.log(window.location.pathname);
     const appPathName = window.location?.pathname;
@@ -52,14 +53,21 @@ function App() {
   useEffect(() => {
     if (checkSupportLocalStorage()) {
       console.log('Web Storage is Supported');
-      // console.log(getStorageItemList());
-      consoleJsonList(getStorageItemList());
+      const getItemList = getStorageItemList();
+      console.log(getItemList);
+      if (Array.isArray(getItemList)) {
+        consoleJsonList(getItemList);
+        setJsonHistory(getItemList);
+      }
     }
     checkUrlQuery();
   }, []);
   return (
-    <StyledAppBoard>
-      <HistorySideMenu style={{ minWidth: '12rem' }} />
+    <StyledAppBoard id="app-board">
+      <HistorySideMenu
+        jsonHistory={jsonHistory}
+        style={{ minWidth: '12rem' }}
+      />
       <div style={{ minWidth: 'fit-content' }}>
         <h1>quick-json-react</h1>
         <JsonConverterCard encodedJson={encodedJson} />
