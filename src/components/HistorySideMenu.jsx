@@ -6,7 +6,8 @@ import Modal from 'react-modal';
 const StyledListDivision = styled.div({
   height: '100vh',
   width: '100%',
-  maxWidth: '20rem',
+  maxWidth: '24rem',
+  paddingLeft: '1rem',
   borderRight: '1px solid #777',
 });
 const StyledListItem = styled.li({
