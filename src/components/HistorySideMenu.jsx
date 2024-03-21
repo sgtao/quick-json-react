@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
+import { HiClipboardCopy } from 'react-icons/hi';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 const StyledListDivision = styled.div({
   height: '100vh',
@@ -46,13 +48,31 @@ const StyledModalTitle = styled.div({
 });
 const StyledModalCard = styled.article({
   height: '90%',
-  width: '90%',
+  width: '100%',
   maxWidth: '32rem',
   textAlign: 'left',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'nowrap',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  '& > p': {
+    width: '90%',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
 });
+const CopyButton = styled.button({
+  fontSize: '1.2rem',
+  padding: '0.2rem',
+  margin: '0 0.3rem auto',
+  color: 'blue',
+  backgroundColor: 'inherit',
+  border: 'none',
+  transition: 'transform 0.3s',
+});
+
 const ModalCloseButton = styled.button({
   fontSize: '1.5rem',
   padding: '0.2rem',
@@ -108,6 +128,16 @@ const HistorySideMenu = ({ jsonHistory }) => {
   function closeModal() {
     setIsOpen(false);
   }
+  const copyJson = async (JsonItem) => {
+    try {
+      const copyString = JSON.stringify(JsonItem.value.json);
+      await navigator.clipboard.writeText(copyString);
+      closeModal();
+    } catch (err) {
+      alert('Faild to copy');
+      console.error('Failed to copy: ', err);
+    }
+  };
   return (
     <>
       <StyledListDivision>
@@ -136,11 +166,33 @@ const HistorySideMenu = ({ jsonHistory }) => {
         <StyledModalTitle>
           <h4 role="heading">Key:{shownItem.key}</h4>
           <ModalCloseButton onClick={closeModal} aria-label="Close Button">
-            X
+            <span data-tooltip-id="close-modal-char">X</span>
           </ModalCloseButton>
+          <ReactTooltip
+            id="close-modal-char"
+            place="top"
+            content="Close Modal"
+            style={{ backgroundColor: '#eee', color: '#1100ff' }}
+          />
         </StyledModalTitle>
         <StyledModalCard role="article">
-          {JSON.stringify(shownItem.value.json)}
+          <p>{JSON.stringify(shownItem.value.json)}</p>
+          <CopyButton
+            onClick={() => copyJson(shownItem)}
+            aria-label="Copy JSON"
+          >
+            <HiClipboardCopy
+              data-tooltip-id="copy-json-icon"
+              size={'1.5rem'}
+              color={'#222'}
+            />
+          </CopyButton>
+          <ReactTooltip
+            id="copy-json-icon"
+            place="top"
+            content="Copy and Close"
+            style={{ backgroundColor: 'rgb(200, 247, 206)', color: '#222' }}
+          />
         </StyledModalCard>
       </Modal>
     </>

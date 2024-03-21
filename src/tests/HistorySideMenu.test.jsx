@@ -4,8 +4,8 @@ import HistorySideMenu from '@/components/HistorySideMenu';
 
 describe('HistorySideMenu component', () => {
   let jsonHistory = [
-    { key: '24-03-20', value: '{"name": "John"}' },
-    { key: '24-03-21', value: '{"name": "Jane"}' },
+    { key: '24-03-20', value: '{"savedAt":"2024-03-20","json":{}}' },
+    { key: '24-03-21', value: '{"savedAt":"2024-03-21","json":{}}' },
   ];
 
   test('renders jsonList correctly', () => {
@@ -55,5 +55,39 @@ describe('HistorySideMenu component', () => {
 
     const closedModal = screen.queryByRole('dialog');
     expect(closedModal).not.toBeInTheDocument();
+  });
+
+  test('modal opens and copy JSON correctly', async () => {
+    // jsdom が Clipboard API を実装していないのでダミー実装を用意する
+    Object.assign(navigator, {
+      clipboard: {
+        text: '',
+        readText() {
+          return Promise.resolve(this.text);
+        },
+        writeText(data) {
+          this.text = data;
+          return Promise.resolve();
+        },
+      },
+    });
+
+    render(<HistorySideMenu jsonHistory={jsonHistory} />);
+    const itemIndex = 0;
+    const jsonItem = jsonHistory[itemIndex];
+    const itemDivision = screen
+      .getAllByRole('listitem')
+      .find((listItem) => listItem.textContent === jsonItem.key);
+
+    fireEvent.click(itemDivision);
+
+    const modal = screen.getByRole('dialog');
+    expect(modal).toBeInTheDocument();
+
+    const copyButton = screen.getByLabelText('Copy JSON');
+    await fireEvent.click(copyButton);
+
+    const copiedValue = await navigator.clipboard.readText();
+    expect(copiedValue).toEqual('{}');
   });
 });
