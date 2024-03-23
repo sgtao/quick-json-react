@@ -1,26 +1,46 @@
 // ObjectViewer.jsx
+import { useState, useEffect } from 'react';
+import CodeMirror from '@uiw/react-codemirror';
 
 // eslint-disable-next-line react/prop-types
-const ObjectViewer = ({ obj }) => {
+const ObjectViewer = ({ obj: obj = null }) => {
   // const obj = props.obj ? props.obj : {};
-  const jsonString = JSON.stringify(obj, null, 2);
-  /* POINT style属性に適応させるスタイルをオブジェクトで記述します */
-  const style = {
-    display: 'block', // ブロック表示
-    margin: 'auto', // 配置を左右中央にする
-    border: '1px solid black', // 枠線付けない
-    textAlign: 'left',
-    minWidth: '480px',
-    width: '80%',
-    height: '100%',
-    fontWeight: 'bold',
-  };
+  const [jsonString, setJsonString] = useState('');
+  const [value, setValue] = useState('');
+  useEffect(() => {
+    setJsonString(JSON.stringify(obj, null, 2));
+    // setValue(obj);
+  }, [obj]);
 
+  const style = {
+    margin: 'auto', // 配置を左右中央にする
+    textAlign: 'left',
+    minWidth: '28rem',
+    border: '1px solid #777',
+  };
+  const checkJsonFormat = async (text) => {
+    try {
+      await JSON.parse(text);
+      console.log('valid JSON format');
+    } catch (e) {
+      console.log(`Not JSON format : ${e}`);
+    }
+  };
+  const onChangeEditor = (val) => {
+    // console.log('val:', val);
+    setValue(val);
+    checkJsonFormat(value);
+  };
   return (
     <div>
-      <pre style={style} aria-label="Json-Viewer">
-        {jsonString}
-      </pre>
+      <CodeMirror
+        style={style}
+        value={jsonString}
+        height="200px"
+        // extensions={json()}
+        onChange={onChangeEditor}
+      />
+      ;
     </div>
   );
 };
