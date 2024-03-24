@@ -2,7 +2,7 @@ import { expect, describe, it } from 'vitest';
 import { render } from '@testing-library/react';
 import ObjectViewer from '@/components/ObjectViewer';
 
-describe('ObjectViewer', () => {
+describe('Show test in ObjectViewer', () => {
   it('should display blank Object as {}', () => {
     // Arrange
     const testObject = {};
@@ -42,3 +42,27 @@ describe('ObjectViewer', () => {
     expect(found).toBe(true);
   });
 });
+
+// describe('Edit test in ObjectViewer', () => {
+//   test('ObjectViewer updates value on input change', async () => {
+//     // Arrange
+//     const obj = {};
+//     const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+//     // Act
+//     render(<ObjectViewer obj={obj} />);
+//     // ObjectViewer.onChangeEditor('{"newKey":"newValue"}');
+//     // const editorLine = screen.findByText('.cm-line');
+//     const editorLine = screen.findByRole('textbox');
+//     // const editorLine = screen.findByText('{}');
+//     // await userEvent.click(editorLine);
+//     // await userEvent.dblClick(editorLine);
+//     await userEvent.type(editorLine, '{"newKey":"newValue"}');
+
+//     // Assert
+//     expect(consoleLogSpy).toHaveBeenCalledWith('valid JSON format');
+
+//     // clean up
+//     consoleLogSpy.mockRestore();
+//   });
+// });

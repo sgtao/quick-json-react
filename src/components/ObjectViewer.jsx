@@ -11,6 +11,9 @@ const ObjectViewer = ({ obj: obj = null }) => {
     setJsonString(JSON.stringify(obj, null, 2));
     // setValue(obj);
   }, [obj]);
+  useEffect(() => {
+    checkJsonFormat(value);
+  }, [value]);
 
   const style = {
     margin: 'auto', // 配置を左右中央にする
@@ -29,7 +32,6 @@ const ObjectViewer = ({ obj: obj = null }) => {
   const onChangeEditor = (val) => {
     // console.log('val:', val);
     setValue(val);
-    checkJsonFormat(value);
   };
   return (
     <div>
@@ -40,7 +42,6 @@ const ObjectViewer = ({ obj: obj = null }) => {
         // extensions={json()}
         onChange={onChangeEditor}
       />
-      ;
     </div>
   );
 };
